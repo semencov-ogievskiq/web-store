@@ -1,23 +1,34 @@
 import React from "react";
 import { BrowserRouter as Router} from "react-router-dom";
 import Header from "./components/header.js";
+import { connect } from "react-redux";
 //Компанент дает возможность видеть redux store
-//import { Provider } from 'react-redux'
-//Тут находиться магазин redux
-//import store from './store'
+
+import Test from "./page/test"
 
 
-export default class App extends React.Component{
+class App extends React.Component{
   constructor(props){
     super(props);
+    this.state = this.props.user.user
   }
   render(){
     return(
-      <Router>
-
+      <div style={{marginTop:"200px"}}>
+      <h1>
+        {this.state.login}
+      </h1>
+      
           <Header/>
-
-      </Router>
+          <Test/>
+     
+      </div>
     )
   }
 };
+
+export default connect(
+  state=>{return state},
+  null 
+)(App);
+// export default AddTodo;
