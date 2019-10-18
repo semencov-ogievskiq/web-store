@@ -1,49 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
+import { async } from "q";
 
-class Test extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    
-    console.log(props);
-    this.state = this.props.user.user;
-    this.handleAddTodo = this.handleAddTodo.bind(this)
-  }
-
-  updateInput = input => {
-    this.setState({ input });
+function Test(props){
+  
+  const handleAddTodo = async () => {
+    await props.dispatch({type:"SIGN_IN"});
+    console.log(props)
   };
 
-  handleAddTodo = () => {
-    this.props.dispatch({type:"AUTH"});
-    console.log(this.props)
-  };
-
-  render() {
     return (
       <div style={{marginTop:"100px"}}>
-        <h1 >!{this.props.user.user.login}</h1>
-        <input 
-          onChange={e => this.updateInput(e.target.value)}
-          value={this.state.input}
-        />
-        <button className="add-todo" onClick={this.handleAddTodo}>
+        <h1 >!{props.user.user.login}</h1>
+
+        <button className="add-todo" onClick={handleAddTodo}>
           Add Todo
         </button>
       </div>
     );
-  }
+  
 }
 
 const authfdf = ()=>({
-    type: "AUTH",
+    type: "SIGN_IN",
     payload:{}
 });
 
 const mapStateToProps = state=>{ 
-  var user = state.user
-    return {user: user}
+  var client = state.client
+    return {user: client}
 }
 
 export default connect(
