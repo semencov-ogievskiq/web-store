@@ -11,7 +11,7 @@ function Test(props){
 
     return (
       <div style={{marginTop:"100px"}}>
-        <h1 >!{props.user.user.login}</h1>
+        <h1 >!{props.user.client.login}</h1>
 
         <button className="add-todo" onClick={handleAddTodo}>
           Add Todo

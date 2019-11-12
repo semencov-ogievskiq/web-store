@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
  */
 const User = (props)=>{
     return(
-        <Nav.Link href="#home">{props.client.user.login}</Nav.Link>
+        <Nav.Link href="#home">{props.client.client.login}</Nav.Link>
     )
 }
 
@@ -30,43 +30,35 @@ const Header = (props)=>{
     const user = props.client.user;
 
     const showModal = ()=>{
-        props.dispatch({type:"SHOW_MODAL_AUTH"});
+        props.dispatch({type:"AUTH_SHOW"});
         console.log(props);
     }
 
     return(
-        <Navbar collapseOnSelect fixed="top" expand="md" bg="dark" variant="dark">
-            <Navbar.Brand href="/">Web-Store</Navbar.Brand>
+        <Navbar collapseOnSelect fixed="top" expand="md" bg="light" variant="light">
+            <LinkContainer to="/">
+                <Navbar.Brand>Web-Store</Navbar.Brand>
+            </LinkContainer>
             <Navbar.Toggle aria-controls="navbar-collapse" />
             <Navbar.Collapse id="navbar-collapse">
-                <Container fluid="true">
-                    <Row>
-                        <Col md={12}>
-                            <Nav className="d-inline-block text-bold">
-                                {(typeof user == "object")?
-                                    <User client={client}/>
-                                    :
-                                    <Nav.Link href="" onClick={showModal}>Вход/Регистрация</Nav.Link>
-                                }                                
-                            </Nav>
-                            <Form className="float-right" inline>
-                                <InputGroup>
-                                    <Form.Control type="text" placeholder="Search"  />
-                                    <InputGroup.Prepend>
-                                        <InputGroup.Text id="inputGroupPrepend"><IoIosSearch /></InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                </InputGroup>
-                            </Form>
-                        </Col>
-                        <Col md={12}>
-                            <Nav className="mr-auto">
-                                <Nav.Link href="#home">Главная</Nav.Link>
-                                <Nav.Link href="#features">Товары</Nav.Link>
-                                <Nav.Link href="#pricing">Pricing</Nav.Link>
-                            </Nav>
-                        </Col> 
-                    </Row>
-                </Container>
+                <Nav className="mr-auto">
+                    <LinkContainer to="/catalog">
+                        <Nav.Link>Каталог</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/dostavka">
+                        <Nav.Link>Доставка</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/oNas">
+                        <Nav.Link>О нас</Nav.Link>
+                    </LinkContainer>
+                </Nav>
+                <Nav className="d-inline-block text-bold">
+                    {(typeof user == "object")?
+                        <User client={client}/>
+                        :
+                        <Nav.Link href="" onClick={showModal}>Вход/Регистрация</Nav.Link>
+                    }                                
+                </Nav>
             </Navbar.Collapse>
         </Navbar>
     )

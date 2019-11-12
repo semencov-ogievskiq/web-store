@@ -1,27 +1,33 @@
 const initialState = {
-    user: false,
-    group: [
-        "Гость"
-    ],
-    auth: {
-        modal: false,
-        login: "",
-        password: ""
+    client:{
+        id: null,
+        login: null,
+        f: null,
+        i: 'Гость',
+        o: null,
+        groups: [0]
+    },
+    auth:{
+        Fetch: false,
+        err: false,
+        errMsg: null
     }
 }
 
 export default  function(state = initialState, action){
     switch (action.type){
         case "SIGN_IN": {
-            return {...state,user:
-                {
+            return {
+                ...state,
+                client:{
                     id: 1,
                     login: "admin",
-                    fam: "Иванов",
-                    im: "Иван",
-                    otch: "Иванович"
-                }}
-            
+                    f: "Семенцов-Огиевский",
+                    i: "Алексей",
+                    o: "Михайлович",
+                    groups: [1]
+                }
+            }
         }
         case "SIGN_OUT":{
             return {...state,user:

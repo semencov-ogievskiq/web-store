@@ -1,28 +1,25 @@
 import React from "react";
+//Подключаем роутинг, используется для перехода по страницам
 import { BrowserRouter as Router} from "react-router-dom";
+//React компонент шапки сайта
 import Header from "./components/header.js";
-import { connect } from "react-redux";
-//Компанент дает возможность видеть redux store
+//React компонент тела сайта
+import Main from "./components/main.js";
+//React компонент подвала сайта
+import Footer from "./components/footer.js";
+//React компонент с модальными окнами
+import Modals from "./components/modals.js";
 
-import Test from "./page/test"
+const App = ()=>{
+  return(    
+    <Router>
+      <Header/>
+      <Main/>
+      <Footer/>
+      <Modals/>
+    </Router>
+  )
+}
 
 
-class App extends React.Component{
-  constructor(props){
-    super(props);
-  }
-  render(){
-    return(    
-      <Router>
-        <Header/>
-        <Test/> 
-      </Router>
-    )
-  }
-};
-
-export default connect(
-  state=>{return state},
-  null 
-)(App);
-// export default AddTodo;
+export default App
